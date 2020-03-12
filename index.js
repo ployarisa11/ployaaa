@@ -34,14 +34,14 @@ app.get('/', (req, res) => {
   app.post('/webhook', (request, response) => {
    
     const agent = new WebhookClient({ request, response });
-    var admin = require("firebase-admin");
-   
-    let serviceAccount = require('path/to/serviceAccountKey.json');
-
-    admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount)
-    });
     
+    const admin = require("firebase");
+    admin.initializeApp({
+        apiKey: 'AIzaSyA5KFIcemUtm1_i64TUyifV0WfKjbm9irk',
+        authDomain: 'rru-connect-epeevr.firebaseapp.com',
+        projectId: 'rru-connect-epeevr'
+      });
+
 
 const db = admin.firestore();
     const payload = {
