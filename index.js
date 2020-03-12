@@ -15,7 +15,8 @@ const { Card, Suggestion, Payload } = require("dialogflow-fulfillment");
 const LINE_MESSAGING_API = " https://notify-api.line.me/api/notify";
 
 const admin = require('firebase-admin');
-admin.initializeApp();
+admin.initializeApp(functions.config().firebase);
+
 const db = admin.firestore();
 
 process.env.DEBUG = "dialogflow:debug"; // enables lib debugging statements
