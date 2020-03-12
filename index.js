@@ -38,7 +38,7 @@ app.post('/webhook', (request, response) => {
     const agent = new WebhookClient({ request, response });
     var admin = require("firebase-admin");
 
-    var serviceAccount = require("path/to/serviceAccountKey.json");
+    var serviceAccount = require("serviceAccountKey.json");
     admin.initializeApp({
         credential: admin.credential.cert(serviceAccount),
         databaseURL: "https://rru-connect-epeevr.firebaseio.com"
