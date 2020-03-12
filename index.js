@@ -180,7 +180,7 @@ app.get('/', (req, res) => {
                 }
             });
 
-            agent.add("ploy");
+
             //return ข้อมูลคำตอบ 
 
             return admin.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
