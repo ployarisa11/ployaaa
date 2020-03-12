@@ -16,7 +16,14 @@ const LINE_MESSAGING_API = " https://notify-api.line.me/api/notify";
 
 
 process.env.DEBUG = "dialogflow:debug"; // enables lib debugging statements
+var admin = require("firebase-admin");
 
+var serviceAccount = require("path/to/serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://rru-connect-epeevr.firebaseio.com"
+});
 
 
 
@@ -35,14 +42,6 @@ app.get('/', (req, res) => {
 
   app.post('/webhook', (request, response) => {
    
-    var admin = require("firebase-admin");
-
-var serviceAccount = require("path/to/serviceAccountKey.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://rru-connect-epeevr.firebaseio.com"
-});
 
 const db = admin.firestore();
     const agent = new WebhookClient({ request, response });
