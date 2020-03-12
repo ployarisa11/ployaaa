@@ -25,7 +25,7 @@ admin.initializeApp({
   databaseURL: "https://rru-connect-epeevr.firebaseio.com"
 });
 
-
+const db = admin.firestore();
 
 
 app.use(morgan('dev'))
@@ -42,8 +42,6 @@ app.get('/', (req, res) => {
 
   app.post('/webhook', (request, response) => {
    
-
-const db = admin.firestore();
     const agent = new WebhookClient({ request, response });
     const payload = {
         "type": "template",
