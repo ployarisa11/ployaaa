@@ -13,7 +13,15 @@ const { WebhookClient } = require("dialogflow-fulfillment");
 const { Card, Suggestion, Payload } = require("dialogflow-fulfillment");
 const LINE_MESSAGING_API = " https://notify-api.line.me/api/notify";
 
+var admin = require("firebase-admin");
 
+var serviceAccount = require("serviceAccountKey.json");
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://rru-connect-epeevr.firebaseio.com"
+  });
+  
+  const db = admin.firestore();
 
 process.env.DEBUG = "dialogflow:debug"; // enables lib debugging statements
 
@@ -34,15 +42,7 @@ app.get('/', (req, res) => {
   
 
   app.post('/webhook', (request, response) => {
-    var admin = require("firebase-admin");
 
-    var serviceAccount = require("path/to/serviceAccountKey.json");
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
-        databaseURL: "https://rru-connect-epeevr.firebaseio.com"
-      });
-      
-      const db = admin.firestore();
     const agent = new WebhookClient({ request, response });
     const payload = {
         "type": "template",
