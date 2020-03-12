@@ -35,7 +35,8 @@ app.get('/', (req, res) => {
    
     const agent = new WebhookClient({ request, response });
     
-    const firebase = require("firebase");
+   
+    const firebase = require('firebase-admin');
     var firebaseConfig = {
         apiKey: "AIzaSyA5KFIcemUtm1_i64TUyifV0WfKjbm9irk",
         authDomain: "rru-connect-epeevr.firebaseapp.com",
