@@ -13,12 +13,6 @@ const { Card, Suggestion, Payload } = require("dialogflow-fulfillment");
 const LINE_MESSAGING_API = " https://notify-api.line.me/api/notify";
 var admin = require("firebase-admin");
 
-
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
-  databaseURL: "https://rru-connect-epeevr.firebaseio.com"
-});
-
 const db = admin.firestore();
 
 process.env.DEBUG = "dialogflow:debug"; // enables lib debugging statements
