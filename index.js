@@ -46,9 +46,7 @@ app.get('/', (req, res) => {
   app.post('/webhook', (request, response) => {
    
     const agent = new WebhookClient({ request, response });
-    
-    
-        const db = admin.firestore();
+    const db = admin.firestore();
 
 
     
@@ -84,7 +82,7 @@ app.get('/', (req, res) => {
 
             //return ข้อมูลคำตอบ 
 
-             db.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
+            return db.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
                 snapshot.forEach(doc => {
                     agent.add("การเพิ่มรายวิชา\n" + doc.data().description);
                     agent.add(payload่json); //แสดง paylaod
