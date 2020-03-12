@@ -11,14 +11,9 @@ const { WebhookClient } = require("dialogflow-fulfillment");
 
 const { Card, Suggestion, Payload } = require("dialogflow-fulfillment");
 const LINE_MESSAGING_API = " https://notify-api.line.me/api/notify";
-const admin = require("firebase");
-  firebase.initializeApp({
-    apiKey: 'AIzaSyA5KFIcemUtm1_i64TUyifV0WfKjbm9irk',
-    authDomain: 'rru-connect-epeevr.firebaseapp.com',
-    projectId: 'rru-connect-epeevr'
-  });
 
-
+const admin = require('firebase-admin');
+admin.initializeApp();
 const db = admin.firestore();
 
 process.env.DEBUG = "dialogflow:debug"; // enables lib debugging statements
