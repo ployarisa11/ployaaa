@@ -19,11 +19,11 @@ process.env.DEBUG = "dialogflow:debug"; // enables lib debugging statements
 
 var admin = require("firebase-admin");
 
-
 admin.initializeApp({
     credential: admin.credential.applicationDefault(),
   databaseURL: "https://rru-connect-epeevr.firebaseio.com"
 });
+
 
 const db = admin.firestore();
 
@@ -181,7 +181,7 @@ app.get('/', (req, res) => {
                 }
             });
 
-
+            agent.add("ploy");
             //return ข้อมูลคำตอบ 
 
             return admin.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
