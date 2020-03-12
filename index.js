@@ -51,9 +51,7 @@ app.get('/', (req, res) => {
 const db = admin.firestore();
     let date = new Date();
 
-    //Count_Accuracy
-
-    let Count_Intent = admin.firestore().collection("Count_Intent").doc(date.toLocaleDateString());
+    
 
 
     //หมวดการลงทะเบียน
@@ -86,7 +84,7 @@ const db = admin.firestore();
 
             //return ข้อมูลคำตอบ 
 
-             admin.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
+             db.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
                 snapshot.forEach(doc => {
                     agent.add("การเพิ่มรายวิชา\n" + doc.data().description);
                     agent.add(payload่json); //แสดง paylaod
