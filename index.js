@@ -7,7 +7,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-
+const port = process.env.PORT || 4000;
 
 // Import the appropriate class
 const {
@@ -51,3 +51,6 @@ app.post('/webhook', (req, res) => {
   agent.handleRequest(intentMap);
 });
 
+app.listen(port, () => {
+  console.log(`Server is running at port: ${port}`);
+});
