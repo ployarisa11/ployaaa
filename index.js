@@ -15,7 +15,10 @@ const { Card, Suggestion, Payload } = require("dialogflow-fulfillment");
 const LINE_MESSAGING_API = " https://notify-api.line.me/api/notify";
 
 const admin = require('firebase-admin');
-admin.initializeApp(functions.config().firebase);
+admin.initializeApp({
+    credential: admin.credential.applicationDefault(),
+    databaseURL: 'https://rru-connect-epeevr.firebaseio.com'
+  });
 
 const db = admin.firestore();
 
