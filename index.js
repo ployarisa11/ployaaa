@@ -11,17 +11,9 @@ const functions = require("firebase-functions");
 const { WebhookClient } = require("dialogflow-fulfillment");
 
 const { Card, Suggestion, Payload } = require("dialogflow-fulfillment");
-const LINE_MESSAGING_API = " https://notify-api.line.me/api/notify";
 
-var admin = require("firebase-admin");
 
-var serviceAccount = require("path/to/serviceAccountKey");
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://rru-connect-epeevr.firebaseio.com"
-  });
-  
-  const db = admin.firestore();
+
 
 process.env.DEBUG = "dialogflow:debug"; // enables lib debugging statements
 
@@ -35,15 +27,24 @@ app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
     res.send({
-      success: true
+        success: true
     });
-  })
+})
 
-  
 
-  app.post('/webhook', (request, response) => {
+
+app.post('/webhook', (request, response) => {
 
     const agent = new WebhookClient({ request, response });
+    var admin = require("firebase-admin");
+
+    var serviceAccount = require("path/to/serviceAccountKey");
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        databaseURL: "https://rru-connect-epeevr.firebaseio.com"
+    });
+
+    const db = admin.firestore();
     const payload = {
         "type": "template",
         "altText": "this is a confirm template",
@@ -206,4 +207,4 @@ app.get('/', (req, res) => {
 );
 app.listen(port, () => {
     console.log(`Server is running at port: ${port}`);
-  });
+});
