@@ -20,12 +20,7 @@ var admin = require("firebase-admin");
 
 var serviceAccount = require("path/to/serviceAccountKey.json");
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://rru-connect-epeevr.firebaseio.com"
-});
 
-const db = admin.firestore();
 
 
 app.use(morgan('dev'))
@@ -41,7 +36,12 @@ app.get('/', (req, res) => {
   
 
   app.post('/webhook', (request, response) => {
-   
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        databaseURL: "https://rru-connect-epeevr.firebaseio.com"
+      });
+      
+      const db = admin.firestore();
     const agent = new WebhookClient({ request, response });
     const payload = {
         "type": "template",
@@ -200,9 +200,6 @@ app.get('/', (req, res) => {
 
     //การลงทะเบียน
     intentMap.set("Additional_Credit_Registration", Additional_Credit_Registration);//การเพิ่ม
-   
-  
-
     agent.handleRequest(intentMap);
 }
 );
