@@ -19,7 +19,7 @@ process.env.DEBUG = "dialogflow:debug"; // enables lib debugging statements
 
 var admin = require("firebase");
 
-var serviceAccount = require("path/to/serviceAccountKey.json");
+var serviceAccount = require("serviceAccountKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
