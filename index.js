@@ -17,19 +17,14 @@ const LINE_MESSAGING_API = " https://notify-api.line.me/api/notify";
 
 process.env.DEBUG = "dialogflow:debug"; // enables lib debugging statements
 
-const firebase = require("firebase");
-   
-    var firebaseConfig = {
-        apiKey: "AIzaSyA5KFIcemUtm1_i64TUyifV0WfKjbm9irk",
-        authDomain: "rru-connect-epeevr.firebaseapp.com",
-        databaseURL: "https://rru-connect-epeevr.firebaseio.com",
-        projectId: "rru-connect-epeevr",
-        storageBucket: "rru-connect-epeevr.appspot.com",
-        messagingSenderId: "898597223567",
-        appId: "1:898597223567:web:8cd2b5064e8edbaf20c4fa"
-      };
-      // Initialize Firebase
-      const admin = firebase.initializeApp(firebaseConfig);
+var admin = require("firebase");
+
+var serviceAccount = require("path/to/serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://rru-connect-epeevr.firebaseio.com"
+});
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
