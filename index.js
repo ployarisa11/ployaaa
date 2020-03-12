@@ -36,11 +36,12 @@ app.get('/', (req, res) => {
     const agent = new WebhookClient({ request, response });
     var admin = require("firebase-admin");
    
+    let serviceAccount = require('path/to/serviceAccountKey.json');
 
     admin.initializeApp({
-        credential: admin.credential.applicationDefault()
-      });
-
+      credential: admin.credential.cert(serviceAccount)
+    });
+    
 
 const db = admin.firestore();
     const payload = {
