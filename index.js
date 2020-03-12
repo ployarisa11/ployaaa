@@ -48,29 +48,7 @@ app.get('/', (req, res) => {
       };
       // Initialize Firebase
       const admin = firebase.initializeApp(firebaseConfig);
-
-
 const db = admin.firestore();
-    const payload = {
-        "type": "template",
-        "altText": "this is a confirm template",
-        "template": {
-            "type": "confirm",
-            "actions": [
-                {
-                    "type": "message",
-                    "label": "ถูก",
-                    "text": "ถูก"
-                },
-                {
-                    "type": "message",
-                    "label": "ไม่ถูก",
-                    "text": "ไม่ถูก"
-                }
-            ],
-            "text": "คุณได้รับคำตอบถูกต้องไหมคะ?"
-        }
-    };
     let date = new Date();
 
     //Count_Accuracy
@@ -190,7 +168,7 @@ const db = admin.firestore();
 
             //return ข้อมูลคำตอบ 
 
-            return admin.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
+            admin.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
                 snapshot.forEach(doc => {
                     agent.add("การเพิ่มรายวิชา\n" + doc.data().description);
                     agent.add(payload่json); //แสดง paylaod
