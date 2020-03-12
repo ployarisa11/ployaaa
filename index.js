@@ -35,16 +35,18 @@ app.get('/', (req, res) => {
    
     const agent = new WebhookClient({ request, response });
     
-    const admin = require("firebase-admin");
-    admin.initializeApp({
+    const firebase = require("firebase");
+    var firebaseConfig = {
         apiKey: "AIzaSyA5KFIcemUtm1_i64TUyifV0WfKjbm9irk",
-    authDomain: "rru-connect-epeevr.firebaseapp.com",
-    databaseURL: "https://rru-connect-epeevr.firebaseio.com",
-    projectId: "rru-connect-epeevr",
-    storageBucket: "rru-connect-epeevr.appspot.com",
-    messagingSenderId: "898597223567",
-    appId: "1:898597223567:web:8cd2b5064e8edbaf20c4fa"
-      });
+        authDomain: "rru-connect-epeevr.firebaseapp.com",
+        databaseURL: "https://rru-connect-epeevr.firebaseio.com",
+        projectId: "rru-connect-epeevr",
+        storageBucket: "rru-connect-epeevr.appspot.com",
+        messagingSenderId: "898597223567",
+        appId: "1:898597223567:web:8cd2b5064e8edbaf20c4fa"
+      };
+      // Initialize Firebase
+      const admin = firebase.initializeApp(firebaseConfig);
 
 
 const db = admin.firestore();
