@@ -83,7 +83,7 @@ app.get('/', (req, res) => {
 
             //return ข้อมูลคำตอบ 
 
-            return db.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
+            return db.collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
                 snapshot.forEach(doc => {
                     agent.add("การเพิ่มรายวิชา\n" + doc.data().description);
                     agent.add(payload่json); //แสดง paylaod
@@ -96,8 +96,6 @@ app.get('/', (req, res) => {
     
 
     let intentMap = new Map();
-
-
     //การลงทะเบียน
     intentMap.set("Additional_Credit_Registration", Additional_Credit_Registration);//การเพิ่ม
 
