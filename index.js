@@ -35,10 +35,11 @@ app.get('/', (req, res) => {
    
     const agent = new WebhookClient({ request, response });
     var admin = require("firebase-admin");
-    const functions = require('firebase-functions');
+   
 
-    admin.initializeApp(functions.config().firebase);
-
+    admin.initializeApp({
+        credential: admin.credential.applicationDefault()
+      });
 
 
 const db = admin.firestore();
