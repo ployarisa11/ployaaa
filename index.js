@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
   app.post('/webhook', (request, response) => {
    
     const agent = new WebhookClient({ request, response });
-    const db = admin.firestore();
+    
 
 
     
@@ -55,6 +55,7 @@ app.get('/', (req, res) => {
     //หมวดการลงทะเบียน
     //การเพิ่ม
     function Additional_Credit_Registration(agent) {
+        const db = admin.firestore();
         let payload = {
             "type": "template",
             "altText": "this is a confirm template",
