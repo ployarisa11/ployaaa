@@ -1,14 +1,5 @@
-"use strict";
 
-const functions = require("firebase-functions");
-const { WebhookClient } = require("dialogflow-fulfillment");
-const { Card, Suggestion, Payload } = require("dialogflow-fulfillment");
-const LINE_MESSAGING_API = " https://notify-api.line.me/api/notify";
-const admin = require('firebase-admin');
-admin.initializeApp();
-const db = admin.firestore();
-const https = require('https');
-process.env.DEBUG = "dialogflow:debug"; // enables lib debugging statements
+
 
 const express = require('express');
 const app = express();
@@ -16,14 +7,32 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const port = process.env.PORT || 4000;
 
+const functions = require("firebase-functions");
+
+const { WebhookClient } = require("dialogflow-fulfillment");
+
+const { Card, Suggestion, Payload } = require("dialogflow-fulfillment");
+const LINE_MESSAGING_API = " https://notify-api.line.me/api/notify";
+
+const admin = require('firebase-admin');
+admin.initializeApp();
+const db = admin.firestore();
+
+process.env.DEBUG = "dialogflow:debug"; // enables lib debugging statements
+
+
+
 app.use(morgan('dev'))
 app.use(bodyParser.json())
+
 
 app.get('/', (req, res) => {
     res.send({
       success: true
     });
   })
+
+  
 
   app.post('/webhook', (request, response) => {
  
