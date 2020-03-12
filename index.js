@@ -15,7 +15,7 @@ const LINE_MESSAGING_API = " https://notify-api.line.me/api/notify";
 
 var admin = require("firebase-admin");
 
-var serviceAccount = require("serviceAccountKey.json");
+var serviceAccount = require("path/to/serviceAccountKey");
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://rru-connect-epeevr.firebaseio.com"
