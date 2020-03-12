@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     });
   })
 
-  pp.post('/webhook', (request, response) => {
+  app.post('/webhook', (request, response) => {
  
     const agent = new WebhookClient({ request, response });
     const payload = {
