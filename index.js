@@ -103,11 +103,9 @@ app.get('/', (req, res) => {
         //ประกาศตัวแปร payload เพื่อแสดงออกหน้าจอ
         let payload่json = new Payload(`LINE`, payload, { sendAsMessage: true });
 
-                    agent.add("การเพิ่มรายวิชา\n" + doc.data().description);
+                    agent.add("การเพิ่มรายวิชา");
                     agent.add(payload่json); //แสดง paylaod
-                    //agent.add(date.toLocaleDateString());
 
-          
 
         
     }
