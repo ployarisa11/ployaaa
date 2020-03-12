@@ -19,8 +19,8 @@ process.env.DEBUG = "dialogflow:debug"; // enables lib debugging statements
 
 
 
-app.use(morgan('dev'))
-app.use(bodyParser.json())
+app.use(morgan('dev'));
+app.use(bodyParser.json());
 
 
 app.get('/', (req, res) => {
@@ -69,7 +69,6 @@ const db = admin.firestore();
     //Count_Accuracy
 
     let Count_Intent = admin.firestore().collection("Count_Intent").doc(date.toLocaleDateString());
-
 
 
     //หมวดการลงทะเบียน
