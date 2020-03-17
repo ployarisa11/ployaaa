@@ -1,28 +1,34 @@
 {
-  "name": "webhook-dialogflow",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "actions-on-google": "^2.7.0",
-    "body-parser": "^1.19.0",
-    "dialogflow-fulfillment": "^0.6.1",
-    "express": "^4.17.1",
-    "morgan": "^1.9.1"
+  "name": "iot_express_firestore",
+  "version": "0.3.0",
+  "description": "IoT Express Firestore Heroku",
+  "engines": {
+    "node": "8.9.1"
   },
-  "devDependencies": {},
+  "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "firebase": "^5.5.1"
+  },
+  "devDependencies": {
+    "request": "^2.81.0",
+    "tape": "^4.7.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/siriphonNott/webhook-dialogflow.git"
+    "url": "https://github.com/heroku/node-js-getting-started"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/siriphonNott/webhook-dialogflow/issues"
-  },
-  "homepage": "https://github.com/siriphonNott/webhook-dialogflow#readme"
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
 }

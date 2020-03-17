@@ -1,56 +1,36 @@
-/*
-  Webhook of Dialogflow
-  @author: NottDev
-  date: 31/05/2019
-*/
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const port = process.env.PORT || 4000;
+const express = require('express')
+const PORT = process.env.PORT || 5000
+var app = express();
+var fire = require('./fire')
+var cors = require('cors');
+var bodyParser = require('body-parser');
 
-// Import the appropriate class
-const {
-  WebhookClient
-} = require('dialogflow-fulfillment');
-
-app.use(morgan('dev'))
-app.use(bodyParser.json())
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-  res.send({
-    success: true
+  res.send(
+    '<h1>Tes Express & Firebase Cloud Firestore</h1><ul><li><p><b>GET /data/esp8266</b></p></li><li><p><b>GET /data/esp32</b></p></li><li><p><b>GET /data/mkr1000</b></p></li><li><p><b>POST /data/esp8266</b>  => {suhu, lembab, analog}</p></li><li><p><b>POST /data/esp32</b>  => {suhu, lembab, analog}</p></li><li><p><b>POST /data/mkr1000</b>  => {suhu, lembab, analog}</p></li></ul>')
+})
+
+
+app.post('/webhook', (req, res)=>{
+  const db = fire.firestore();
+	db.collection(Category_URL).doc('Topic').collection(Data_Subcategory).doc(Data_Subcategory).collection(Data_Head).orderBy("date", "desc").get().then((snapshot) => {
+    snapshot.forEach(doc => {
+        console.log(doc.id);
+
+    });
   });
 })
 
-app.post('/webhook', (req, res) => {
-  console.log('POST: /');
-  console.log('Body: ',req.body);
 
-  //Create an instance
-  const agent = new WebhookClient({
-    request: req,
-    response: res
-  });
 
-  //Test get value of WebhookClient
-  console.log('agentVersion: ' + agent.agentVersion);
-  console.log('intent: ' + agent.intent);
-  console.log('locale: ' + agent.locale);
-  console.log('query: ', agent.query);
-  console.log('session: ', agent.session);
 
-  //Function Location
-  function location(agent) {
-    agent.add('Welcome to Thailand.');
-  }
 
-  // Run the proper function handler based on the matched Dialogflow intent name
-  let intentMap = new Map();
-  intentMap.set('Location', location);  // "Location" is once Intent Name of Dialogflow Agent
-  agent.handleRequest(intentMap);
-});
 
-app.listen(port, () => {
-  console.log(`Server is running at port: ${port}`);
-});
+
+app.listen(PORT, () => {
+  console.log(`Listening on ${ PORT }`)
+})
