@@ -12,23 +12,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', (req, res) => {
   res.send(
     '<h1>Tes Express & Firebase Cloud Firestore</h1><ul><li><p><b>GET /data/esp8266</b></p></li><li><p><b>GET /data/esp32</b></p></li><li><p><b>GET /data/mkr1000</b></p></li><li><p><b>POST /data/esp8266</b>  => {suhu, lembab, analog}</p></li><li><p><b>POST /data/esp32</b>  => {suhu, lembab, analog}</p></li><li><p><b>POST /data/mkr1000</b>  => {suhu, lembab, analog}</p></li></ul>')
-})
 
-
-app.post('/webhook', (req, res)=>{
-  const db = fire.firestore();
-	db.collection(Category_URL).doc('Topic').collection(Data_Subcategory).doc(Data_Subcategory).collection(Data_Head).orderBy("date", "desc").get().then((snapshot) => {
-    snapshot.forEach(doc => {
-        console.log(doc.id);
-
+    const db = fire.firestore();
+    db.collection(Category_URL).doc('Topic').collection(Data_Subcategory).doc(Data_Subcategory).collection(Data_Head).orderBy("date", "desc").get().then((snapshot) => {
+      snapshot.forEach(doc => {
+          console.log(doc.id);
+       
+      });
     });
-  });
+ 
 })
 
 
 
 
-
+  app.post('/webhook', (req, res)=>{
+    const db = fire.firestore();
+    db.collection(Category_URL).doc('Topic').collection(Data_Subcategory).doc(Data_Subcategory).collection(Data_Head).orderBy("date", "desc").get().then((snapshot) => {
+      snapshot.forEach(doc => {
+          console.log(doc.id);
+          res.send(doc.id);
+      });
+    });
+  })
 
 
 app.listen(PORT, () => {
