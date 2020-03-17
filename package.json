@@ -1,34 +1,36 @@
 {
-  "name": "iot_express_firestore",
-  "version": "0.3.0",
-  "description": "IoT Express Firestore Heroku",
-  "engines": {
-    "node": "8.9.1"
-  },
+  "name": "line-notify-api",
+  "version": "1.0.0",
+  "description": "Javascript Line Notify",
   "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "node test.js"
-  },
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "cors": "^2.8.4",
-    "ejs": "^2.5.6",
-    "express": "^4.15.2",
-    "firebase": "^5.5.1"
+    "@line/bot-sdk": "^6.8.4",
+    "express": "^4.17.1",
+    "node-cron": "^2.0.3",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5"
   },
-  "devDependencies": {
-    "request": "^2.81.0",
-    "tape": "^4.7.0"
+  "engines": {
+    "node": "8.9.1",
+    "npm": "1.1.65"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "git+https://github.com/albertoanggi/js-line-notify.git"
   },
   "keywords": [
-    "node",
-    "heroku",
-    "express"
+    "LINE",
+    "API",
+    "notify"
   ],
-  "license": "MIT"
+  "author": "Anggi Alberto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/albertoanggi/js-line-notify/issues"
+  },
+  "homepage": "https://github.com/albertoanggi/js-line-notify#readme",
+  "devDependencies": {
+    "@types/firebase": "^3.2.1",
+    "firebase": "^7.8.0"
+  }
 }
