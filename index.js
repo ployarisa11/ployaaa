@@ -10,7 +10,13 @@ const morgan = require('morgan');
 const port = process.env.PORT || 4000;
 const admin = require('firebase-admin');
 
+let serviceAccount = require('Admin_SDK.json');
 
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+let db = admin.firestore();
 
 
 // Import the appropriate class
@@ -25,6 +31,8 @@ app.get('/', (req, res) => {
   res.send({
     success: true
   });
+
+  
 })
 
 app.post('/webhook', (req, res) => {
@@ -123,126 +131,7 @@ app.post('/webhook', (req, res) => {
   //หมวดการลงทะเบียน
   //การเพิ่ม
   function Additional_Credit_Registration(agent) {
-      let payload = {
-          "type": "template",
-          "altText": "this is a confirm template",
-          "template": {
-              "type": "confirm",
-              "actions": [
-                  {
-                      "type": "message",
-                      "label": "ใช่",
-                      "text": "ช่วยตอบคำถามในเรื่องการเพิ่มรายวิชา"
-                  },
-                  {
-                      "type": "message",
-                      "label": "ไม่ใช่",
-                      "text": "ไม่ช่วยตอบคำถามในเรื่องการเพิ่มรายวิชา"
-                  }
-              ],
-              "text": "น้องบ๊อตช่วยตอบคำถามของท่านใช่หรือไม่?"
-          }
-      };
-
-      //ประกาศตัวแปร payload เพื่อแสดงออกหน้าจอ
-      let payload่json = new Payload(`LINE`, payload, { sendAsMessage: true });
-      let text = request.body.queryResult.queryText;
-      let c = 'ช่วยตอบคำถามในเรื่องการเพิ่มรายวิชา';
-      let b = 'ไม่ช่วยตอบคำถามในเรื่องการเพิ่มรายวิชา';
-
-      //Count_Accuracy
-      let Count_Accuracy = admin.firestore().collection("Count_Accuracy").doc(date.toLocaleDateString()).collection("การลงทะเบียน").doc("การเพิ่มรายวิชา");
-      Count_Accuracy.get().then(function (docs) {
-          if (!docs.exists) {
-              Count_Accuracy.set({
-                  ใช่: 0,
-                  ไม่ใช่: 0
-              });
-          }
-
-      });
-
-
-      if (text === c) {
-          agent.add("กรุณากดดาวเพื่อประเมินความพึงพอใจหลังการใช้ระบบ")
-          agent.add(pay1);
-          db.runTransaction(t => {
-              return t.get(Count_Accuracy).then(doc => {
-                  let newcount = doc.data().ใช่ + 1;
-
-                  t.update(Count_Accuracy, {
-                      ใช่: newcount,
-
-                  });
-              });
-          });
-
-
-
-      }
-
-      else if (text === b) {
-
-          agent.add("กรุณากดปุ่มติดต่อเจ้าหน้าที่");
-          db.runTransaction(t => {
-              return t.get(Count_Accuracy).then(doc => {
-                  let newcount = doc.data().ไม่ใช่ + 1;
-
-                  t.update(Count_Accuracy, {
-                      ไม่ใช่: newcount,
-
-                  });
-              });
-          });
-
-      }
-      else {
-          //เชคว่ามี ตัว doc อยู๋ไหม ถ้าไม่ ก็ set ค่า 
-          // count_intent 
-          Count_Intent.get().then(function (docs) {
-              if (!docs.exists) {
-                  Count_Intent.set({
-                      การลงทะเบียน: 1
-                  });
-              }
-
-              else {
-                  //เลขcount เวลามีคนเข้ามาสอบถาม
-
-                  let transaction = db.runTransaction(t => {
-                      return t.get(Count_Intent).then(doc => {
-                          if (doc.data().การลงทะเบียน > 0) {
-                              let newcount = doc.data().การลงทะเบียน + 1;
-
-                              t.update(Count_Intent, {
-                                  การลงทะเบียน: newcount,
-
-                              });
-                          } else {
-                              t.update(Count_Intent, {
-                                  การลงทะเบียน: 1
-                              });
-
-                          }
-
-                      });
-                  });
-              }
-          });
-
-
-          //return ข้อมูลคำตอบ 
-
-          return admin.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
-              snapshot.forEach(doc => {
-                  agent.add("การเพิ่มรายวิชา\n" + doc.data().description);
-                  agent.add(payload่json); //แสดง paylaod
-                  //agent.add(date.toLocaleDateString());
-
-              });
-          });
-
-      }
+      agent.add("l;p");
   }
 
   // Run the proper function handler based on the matched Dialogflow intent name
