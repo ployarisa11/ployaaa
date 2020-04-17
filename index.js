@@ -15,16 +15,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/data', (req, res) => {
-  const db = fire.firestore();
-  const admin = fire.firestore();
+  
   console.log("pp")
-  admin.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
-    snapshot.forEach(doc => {
-        console.log(doc.data().description);
-      
-
-    });
-});
+  
 })
 
 app.post('/data/esp8266', (req, res)=>{
