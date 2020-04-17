@@ -11,14 +11,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
  
-    res.send('<h1>sl</h1>' )
+    
     const db = fire.firestore();
     const admin = fire.firestore();
     res.send('<h1>sl</h1>' )
     console.log("pp")
     admin.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
       snapshot.forEach(doc => {
-       
+        res.send('<h1>sl</h1>' )
           console.log(doc.data().description);
         
   
