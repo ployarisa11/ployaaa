@@ -1,78 +1,42 @@
-/*
-  Webhook of Dialogflow
-  @author: NottDev
-  date: 31/05/2019
-*/
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const port = process.env.PORT || 4000;
-const admin = require('firebase-admin');
+const express = require('express')
+const PORT = process.env.PORT || 5000
+var app = express();
+var fire = require('./fire')
+var cors = require('cors');
+var bodyParser = require('body-parser');
 
-let serviceAccount = require('Admin_SDK.json');
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
-
-let db = admin.firestore();
-
-
-// Import the appropriate class
-const {
-  WebhookClient
-} = require('dialogflow-fulfillment');
-
-app.use(morgan('dev'))
-app.use(bodyParser.json())
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-  res.send({
-    success: true
-  });
-
-  
+  res.send(
+    '<h1>Tes Express & Firebase Cloud Firestore</h1><ul><li><p><b>GET /data/esp8266</b></p></li><li><p><b>GET /data/esp32</b></p></li><li><p><b>GET /data/mkr1000</b></p></li><li><p><b>POST /data/esp8266</b>  => {suhu, lembab, analog}</p></li><li><p><b>POST /data/esp32</b>  => {suhu, lembab, analog}</p></li><li><p><b>POST /data/mkr1000</b>  => {suhu, lembab, analog}</p></li></ul>')
 })
 
-app.post('/webhook', (req, res) => {
-  console.log('POST: /');
-  console.log('Body: ',req.body);
+app.get('data', (req, res) => {
+  const db = fire.firestore();
+  const admin = fire.firestore();
+  admin.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
+    snapshot.forEach(doc => {
+        console.log(doc.data().description);
+      
 
-  //Create an instance
-  const agent = new WebhookClient({
-    request: req,
-    response: res
-  });
-
-  //Test get value of WebhookClient
-  console.log('agentVersion: ' + agent.agentVersion);
-  console.log('intent: ' + agent.intent);
-  console.log('locale: ' + agent.locale);
-  console.log('query: ', agent.query);
-  console.log('session: ', agent.session);
-
-
-
-
-  //Function Location
-
-
-
-
-  //หมวดการลงทะเบียน
-  //การเพิ่ม
-  function Additional_Credit_Registration(agent) {
-      agent.add("l;p");
-  }
-
-  // Run the proper function handler based on the matched Dialogflow intent name
-  let intentMap = new Map();
-
-  intentMap.set("Additional_Credit_Registration", Additional_Credit_Registration);//การเพิ่ม
-  agent.handleRequest(intentMap);
+    });
 });
+})
 
-app.listen(port, () => {
-  console.log(`Server is running at port: ${port}`);
-});
+app.post('/data/esp8266', (req, res)=>{
+ 
+})
+
+
+
+
+
+
+
+
+app.listen(PORT, () => {
+  console.log(`Listening on ${ PORT }`)
+})
