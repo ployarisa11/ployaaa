@@ -10,13 +10,7 @@ const morgan = require('morgan');
 const port = process.env.PORT || 4000;
 const admin = require('firebase-admin');
 
-let serviceAccount = require('Admin_SDK.json');
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
-
-let db = admin.firestore();
 
 
 // Import the appropriate class
