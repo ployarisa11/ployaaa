@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     console.log("pp")
     admin.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
       snapshot.forEach(doc => {
-        res.send('<h1>'+doc.data().description + '</h1>'  )
+        res.send('<h1>สหหห</h1>'  )
           console.log(doc.data().description);
         
   
