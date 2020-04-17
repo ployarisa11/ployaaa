@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     
     const db = fire.firestore();
     const admin = fire.firestore();
-    res.send('<h1>sl</h1>' )
+    
     console.log("pp")
     admin.firestore().collection('Registration').doc('Topic').collection('การเพิ่มรายวิชา').orderBy("date", "desc").limit(1).get().then((snapshot) => {
       snapshot.forEach(doc => {
