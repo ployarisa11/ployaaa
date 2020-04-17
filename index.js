@@ -56,75 +56,7 @@ app.post('/webhook', (req, res) => {
 
 
   //Function Location
-  let user_id = request.body.originalDetectIntentRequest.payload.data.source.userId;
-  let pay = {
-      "type": "imagemap",
-      "baseUrl": "https://s3-ap-southeast-1.amazonaws.com/img-in-th/9c33fe1533a8315572294fcdbe714231.jpg?_ignored=",
-      "altText": "แบบประเมินความพึงพอใจ",
-      "baseSize": {
-        "width": 1040,
-        "height": 554
-      },
-      "actions": [
-        {
-          "type": "message",
-          "area": {
-            "x": 19,
-            "y": 247,
-            "width": 163,
-            "height": 297
-          },
-          "text": "มีความพึงพอใจต่อระบบน้อยที่สุด"
-        },
-        {
-          "type": "message",
-          "area": {
-            "x": 237,
-            "y": 249,
-            "width": 155,
-            "height": 293
-          },
-          "text": "มีความพึงพอใจต่อระบบน้อย"
-        },
-        {
-          "type": "message",
-          "area": {
-            "x": 434,
-            "y": 252,
-            "width": 175,
-            "height": 289
-          },
-          "text": "มีความพึงพอใจต่อระบบปานกลาง"
-        },
-        {
-          "type": "message",
-          "area": {
-            "x": 650,
-            "y": 252,
-            "width": 154,
-            "height": 286
-          },
-          "text": "มีความพึงพอใจต่อระบบมาก"
-        },
-        {
-          "type": "message",
-          "area": {
-            "x": 855,
-            "y": 254,
-            "width": 164,
-            "height": 283
-          },
-          "text": "มีความพึงพอใจต่อระบบมากที่สุด"
-        }
-      ]
-      };
-  
-  
-      let pay1 = new Payload(`LINE`, pay, { sendAsMessage: true });
 
-  let date = new Date();
-  //Count_Accuracy
-  let Count_Intent = admin.firestore().collection("Count_Intent").doc(date.toLocaleDateString());
 
 
 
